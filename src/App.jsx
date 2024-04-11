@@ -1,15 +1,11 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import MovieCard from './MovieCard';
+import NavBar from './NavBar';
 import SearchIcon from './search.svg';
+import 'bootstrap/dist/css/bootstrap.min.css';
 const API_URL = 'http://www.omdbapi.com?apikey=951da4d0';
-// const movie1 = {
-//     "Title": "Titanic: The Legend Goes On...",
-//     "Year": "2000",
-//     "imdbID": "tt0330994",
-//     "Type": "movie",
-//     "Poster": "https://m.media-amazon.com/images/M/MV5BMTg5MjcxODAwMV5BMl5BanBnXkFtZTcwMTk4OTMwMg@@._V1_SX300.jpg"
-// }
+
 const App = () => {
 
     const [movies, setMovies] = useState([]);
@@ -18,19 +14,38 @@ const App = () => {
         const response = await fetch(`${API_URL}&s=${title}`);
         const data = await response.json();
         setMovies(data.Search);
+        console.log(data.Search)
     }
 
     useEffect (() => {
-        searchMovies('tit');
+        searchMovies('titanic');
     }, [])
+    
+    const handleMoviesClick = () => {
+    const filteredMovies = movies.filter(movie => movie.type === "movie");
+    console.log(filteredMovies);
 
+    };
+
+    const handleSeriesClick = () => {
+        // Add logic to handle click on "Series" link
+    };
+
+    const handleKeyPress = (event) => {
+        if (event.key === 'Enter') {
+            searchMovies(searchTerm);
+            
+        }
+    }
     return (
         <div className='app'>
+           
             <h1>Movie Land</h1>
             <div className='search'>
                 <input 
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)} 
+                    onKeyPress={handleKeyPress}
                     type="text" 
                     placeholder='Search for movies'/>
                     <img 
@@ -39,7 +54,9 @@ const App = () => {
                         onClick={() => searchMovies(searchTerm)}
                         />
             </div>
-
+            
+            <NavBar onMoviesClick={handleMoviesClick} onSeriesClick={handleSeriesClick} />
+            {/* Other components and content */}
         {
             movies?.length > 0
             ? (<div className='container'>
