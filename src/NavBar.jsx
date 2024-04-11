@@ -2,15 +2,14 @@ import React from "react";
 import './nav.css';
 
 const NavBar = ({ onMoviesClick, onSeriesClick }) => {
-  const handleMoviesClick = () => {
-    console.log('Movies clicked');
-    onMoviesClick(); // Call the onMoviesClick function if provided
-};
+  const handleClickMovies = () => {
+    onMoviesClick();
+  }
 
-const handleSeriesClick = () => {
-    console.log('Series clicked');
-    onSeriesClick(); // Call the onSeriesClick function if provided
-};
+  const handleClickSeries = () => {
+      onSeriesClick()
+    
+  }
     return (
       
 <nav className="navbar navbar-expand-lg ">
@@ -19,11 +18,11 @@ const handleSeriesClick = () => {
    
     <div className="collapse navbar-collapse" id="navbarNav">
       <ul className="navbar-nav">
-        <li className="nav-item" onClick={handleMoviesClick}>
+        <li className="nav-item" onClick={handleClickMovies}>
           <a className="nav-link " aria-current="page" href="#">Movies</a>
         </li>
         
-        <li className="nav-item" onClick={handleSeriesClick}>
+        <li className="nav-item" onClick={handleClickSeries}>
           <a className="nav-link" href="#">Series</a>
         </li>
         

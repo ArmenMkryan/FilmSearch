@@ -17,19 +17,28 @@ const App = () => {
         console.log(data.Search)
     }
 
+    const [filteredMovies, setFilteredMovies] = useState([]);
+    
+    const handleMoviesClick = () => {
+        console.log('Movies tuuuuu clicked');
+        // Filter movies of type 'movie'
+        const filtered = movies.filter(movie => movie.type === 'movie');
+        setFilteredMovies(filtered);
+    };
+
+    const handleSeriesClick = () => {
+        console.log('Series ruuuu clicked');
+        // Filter movies not of type 'movie' (i.e., 'series')
+        const filtered = movies.filter(movie => movie.type !== 'movie');
+        setFilteredMovies(filtered);
+    };
+
+
     useEffect (() => {
         searchMovies('titanic');
     }, [])
     
-    const handleMoviesClick = () => {
-    const filteredMovies = movies.filter(movie => movie.type === "movie");
-    console.log(filteredMovies);
-
-    };
-
-    const handleSeriesClick = () => {
-        // Add logic to handle click on "Series" link
-    };
+    
 
     const handleKeyPress = (event) => {
         if (event.key === 'Enter') {
